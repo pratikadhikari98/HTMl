@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>कालिका मानवज्ञान माध्यमिक विद्यालय</title>
+<link href="https://fonts.googleapis.com/css2?family=Akshar:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700;900&family=Noto+Serif+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue-dark: #1a3a6b;
+    --blue-mid: #1e5aa8;
+    --blue-light: #3b82d1;
+    --sky: #d6eaf8;
+    --sky-pale: #eaf5fb;
+    --white: #ffffff;
+    --red: #b91c1c;
+    --text: #1a2a3a;
+    --text-light: #4a6080;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Noto Sans Devanagari', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+  /* TOP BAR */
+  .topbar { background: var(--blue-dark); color: #cfe4ff; font-size: 0.78rem; display: flex; justify-content: space-between; align-items: center; padding: 6px 5%; gap: 12px; flex-wrap: wrap; }
+  .topbar a { color: #cfe4ff; text-decoration: none; }
+
+  /* HEADER */
+  header { background: linear-gradient(135deg, var(--sky-pale) 0%, var(--white) 60%, #ddeeff 100%); padding: 14px 5%; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 3px solid var(--blue-mid); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(30,90,168,0.10); flex-wrap: wrap; }
+  .logo-area { display: flex; align-items: center; gap: 14px; }
+  .logo-circle { width: 68px; height: 68px; border-radius: 50%; border: 3px solid var(--blue-mid); background: var(--white); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+  .school-name h1 { font-family: 'Noto Serif Devanagari', serif; font-size: 1.5rem; font-weight: 700; color: var(--blue-dark); line-height: 1.2; }
+  .school-name p { font-size: 0.72rem; color: var(--blue-mid); font-weight: 600; margin-top: 2px; }
+  nav { display: flex; gap: 4px; flex-wrap: wrap; }
+  nav a { color: var(--blue-dark); text-decoration: none; font-size: 0.86rem; font-weight: 600; padding: 7px 12px; border-radius: 6px; transition: background .2s, color .2s; }
+  nav a:hover, nav a.active { background: var(--blue-mid); color: var(--white); }
+  .btn-admit { background: var(--red); color: var(--white) !important; border-radius: 6px; font-weight: 700 !important; }
+  .btn-admit:hover { background: #991b1b !important; }
+
+  /* HERO */
+  .hero { background: linear-gradient(160deg, #c0dff5 0%, #e4f2fb 45%, #f0f8ff 100%); min-height: auto; display: flex; align-items: center; justify-content: center; padding: 60px 5%; gap: 40px; flex-wrap: wrap; }
+  .hero-text { flex: 1 1 320px; }
+  .hero-eyebrow { display: inline-block; background: var(--blue-mid); color: var(--white); font-size: 0.75rem; font-weight: 700; letter-spacing: .08em; padding: 4px 14px; border-radius: 20px; margin-bottom: 16px; }
+  .hero-text h2 { font-family: 'Noto Serif Devanagari', serif; font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 700; color: var(--blue-dark); line-height: 1.35; margin-bottom: 14px; }
+  .hero-text h2 span { color: var(--blue-mid); }
+  .hero-text p { font-size: 0.97rem; color: var(--text-light); line-height: 1.75; margin-bottom: 26px; max-width: 460px; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { background: var(--blue-mid); color: var(--white); padding: 12px 24px; border-radius: 8px; font-size: 0.93rem; font-weight: 700; text-decoration: none; transition: background .2s, transform .15s; display: inline-block; }
+  .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
+  .btn-outline { border: 2px solid var(--blue-mid); color: var(--blue-mid); padding: 10px 20px; border-radius: 8px; font-size: 0.93rem; font-weight: 700; text-decoration: none; transition: background .2s, color .2s; display: inline-block; }
+  .btn-outline:hover { background: var(--blue-mid); color: var(--white); }
+
+  /* WHEEL */
+  .wheel-container { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .wheel-svg-wrap { position: relative; width: 320px; height: 320px; cursor: grab; user-select: none; }
+  .wheel-svg-wrap:active { cursor: grabbing; }
+  .wheel-svg-wrap svg { width: 100%; height: 100%; overflow: visible; }
+  .spin-hint { font-size: 0.75rem; color: var(--blue-mid); font-weight: 600; opacity: 0.75; text-align: center; }
+
+  /* Segment colors alternating */
+  .seg-a { fill: #dbeafe; stroke: #1e5aa8; stroke-width: 2; transition: fill .2s; }
+  .seg-b { fill: #bfdbfe; stroke: #1e5aa8; stroke-width: 2; transition: fill .2s; }
+  .seg-a:hover { fill: #93c5fd; }
+  .seg-b:hover { fill: #60a5fa; }
+
+  /* STATS */
+  .stats-banner { background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 100%); padding: 46px 5%; display: flex; justify-content: center; gap: 56px; flex-wrap: wrap; text-align: center; }
+  .stat { color: var(--white); }
+  .stat-num { font-family: 'Noto Serif Devanagari', serif; font-size: 2.3rem; font-weight: 700; color: #93c5fd; display: block; line-height: 1; }
+  .stat-label { font-size: 0.83rem; opacity: .85; margin-top: 6px; }
+
+  /* WHY */
+  .why-section { background: var(--white); padding: 68px 5%; text-align: center; }
+  .section-label { color: var(--blue-mid); font-size: 0.78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
+  .section-title { font-family: 'Noto Serif Devanagari', serif; font-size: clamp(1.2rem, 2.5vw, 1.85rem); color: var(--blue-dark); font-weight: 700; margin-bottom: 8px; }
+  .section-sub { color: var(--text-light); font-size: 0.93rem; margin-bottom: 46px; }
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 24px; max-width: 980px; margin: 0 auto; }
+  .feature-card { background: linear-gradient(135deg, var(--sky-pale), var(--white)); border: 1.5px solid #c5dcf0; border-radius: 14px; padding: 28px 18px 22px; text-align: center; transition: transform .2s, box-shadow .2s; }
+  .feature-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(30,90,168,.12); }
+  .feature-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--blue-mid); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 1.4rem; }
+  .feature-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--blue-dark); margin-bottom: 7px; }
+  .feature-card p { font-size: 0.8rem; color: var(--text-light); line-height: 1.6; }
+
+  /* NOTICE */
+  .notice-section { background: var(--sky-pale); padding: 68px 5%; }
+  .notice-inner { max-width: 860px; margin: 0 auto; }
+  .notice-list { list-style: none; margin-top: 30px; }
+  .notice-list li { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; background: var(--white); border-radius: 10px; border-left: 4px solid var(--blue-mid); margin-bottom: 12px; box-shadow: 0 2px 8px rgba(30,90,168,.06); }
+  .notice-date { background: var(--blue-mid); color: var(--white); border-radius: 8px; padding: 5px 9px; text-align: center; font-size: 0.73rem; font-weight: 700; line-height: 1.4; min-width: 46px; flex-shrink: 0; }
+  .notice-text strong { display: block; color: var(--blue-dark); font-size: 0.93rem; margin-bottom: 2px; }
+  .notice-text span { font-size: 0.8rem; color: var(--text-light); }
+
+  /* CTA */
+  .cta-section { background: linear-gradient(135deg, #1a3a6b 0%, #1e5aa8 60%, #3b82d1 100%); padding: 70px 5%; text-align: center; color: var(--white); }
+  .cta-section h2 { font-family: 'Noto Serif Devanagari', serif; font-size: clamp(1.2rem, 2.5vw, 1.9rem); margin-bottom: 12px; }
+  .cta-section p { opacity: .85; margin-bottom: 28px; font-size: 0.97rem; }
+  .btn-white { background: var(--white); color: var(--blue-dark); padding: 13px 30px; border-radius: 8px; font-size: 0.98rem; font-weight: 700; text-decoration: none; display: inline-block; transition: transform .2s; }
+  .btn-white:hover { transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer { background: var(--blue-dark); color: #b8d0ed; padding: 46px 5% 22px; }
+  .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 32px; margin-bottom: 32px; }
+  .footer-col h4 { color: var(--white); font-size: 0.93rem; font-weight: 700; margin-bottom: 12px; padding-bottom: 7px; border-bottom: 2px solid var(--blue-light); display: inline-block; }
+  .footer-col p, .footer-col a { font-size: 0.82rem; line-height: 1.9; color: #b8d0ed; text-decoration: none; display: block; }
+  .footer-col a:hover { color: var(--white); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.12); padding-top: 18px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 0.76rem; color: #7da4c4; }
+
+  /* ══ BLACKBOARD NEWS SECTION ══ */
+  .news-section { background: var(--sky-pale); padding: 68px 5%; }
+  .news-inner   { max-width: 1100px; margin: 0 auto; }
+
+  /* 1. Outer board wrapper — fixed aspect ratio, clips everything */
+  .bb-wrap {
+    position: relative;
+    width: 100%;
+    margin-top: 32px;
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.38);
+    cursor: grab;
+    user-select: none;
+    touch-action: pan-y;
+  }
+  .bb-wrap:active { cursor: grabbing; }
+
+  /* 2. Blackboard photo — fills wrapper exactly */
+  .bb-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /*
+   * 3. Text viewport — sits over the chalk-writing area of the board.
+   *    Board image has wooden frame (~10% top, ~12% bottom, ~8% sides).
+   *    ALL text must stay inside this box — overflow:hidden enforces it.
+   */
+  .bb-viewport {
+    position: absolute;
+    top: 10%;
+    bottom: 13%;
+    left: 8%;
+    right: 8%;
+    overflow: hidden;          /* ← key: clips slides at board edge */
+    z-index: 1;
+  }
+
+  /* 4. Slide strip — fills viewport, slides horizontally */
+  .bb-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.45s cubic-bezier(.4,0,.2,1);
+    will-change: transform;
+  }
+
+  /* 5. Each slide = exactly the viewport width/height */
+  .bb-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 2% 4%;
+    overflow: hidden;          /* extra safety per slide */
+  }
+
+  /* Chalk-style text — all sizes relative to vw so they scale with board */
+  .bb-miti {
+    font-family: 'Akshar', 'Noto Sans Devanagari', sans-serif;
+    font-size: clamp(0.55rem, 1.1vw, 1.05rem);
+    font-weight: 700;
+    color: rgba(255,255,255,0.88);
+    width: 100%;
+    text-align: right;
+    margin-bottom: 2%;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bb-heading {
+    font-family: 'Akshar', 'Noto Sans Devanagari', sans-serif;
+    font-size: clamp(0.85rem, 2vw, 1.9rem);
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+    margin-bottom: 3%;
+    letter-spacing: 0.05em;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    line-height: 1.3;
+    width: 100%;
+  }
+  .bb-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 4%;
+    width: 100%;
+  }
+  .bb-line {
+    font-family: 'Akshar', 'Noto Sans Devanagari', sans-serif;
+    font-size: clamp(0.6rem, 1.35vw, 1.2rem);
+    color: rgba(255,255,255,0.92);
+    line-height: 1.5;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    letter-spacing: 0.02em;
+  }
+
+  /* 6. Chalk dots — inside wrapper, below the writing area */
+  .bb-dots {
+    position: absolute;
+    bottom: 4%;
+    left: 0; right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .bb-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.32);
+    border: none;
+    pointer-events: all;
+    cursor: pointer;
+    transition: background .25s, transform .25s;
+    padding: 0;
+  }
+  .bb-dot.active { background: rgba(255,255,255,0.92); transform: scale(1.4); }
+
+  /* 7. Arrow nav below board */
+  .bb-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+  }
+  .bb-btn {
+    background: var(--white);
+    border: 2px solid var(--blue-mid);
+    color: var(--blue-mid);
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    font-size: 1.35rem;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+    box-shadow: 0 2px 8px rgba(30,90,168,.12);
+    flex-shrink: 0;
+  }
+  .bb-btn:hover { background: var(--blue-mid); color: var(--white); }
+  .bb-btn:disabled { opacity: 0.28; cursor: default; }
+
+  .bb-counter {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-weight: 600;
+  }
+
+  /* Loading */
+  .bb-loading-msg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.7);
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+    z-index: 3;
+  }
+
+  /* ── Exam table inside blackboard ── */
+  .bb-table-wrap {
+    width: 100%;
+    overflow: hidden;
+  }
+  .bb-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Akshar', 'Noto Sans Devanagari', sans-serif;
+    table-layout: fixed;
+  }
+  .bb-table th {
+    font-size: clamp(0.45rem, 1vw, 0.72rem);
+    font-weight: 700;
+    color: #fff;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: clamp(1px, 0.5%, 4px) clamp(1px, 0.8%, 6px);
+    text-align: center;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .bb-table td {
+    font-size: clamp(0.4rem, 0.9vw, 0.65rem);
+    color: rgba(255,255,255,0.9);
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: clamp(1px, 0.4%, 3px) clamp(1px, 0.6%, 5px);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  }
+  .bb-table td:first-child {
+    font-weight: 600;
+    color: rgba(255,255,255,0.75);
+    font-size: clamp(0.38rem, 0.82vw, 0.6rem);
+  }
+  .bb-table tr:nth-child(even) td {
+    background: rgba(255,255,255,0.05);
+  }
+
+  @media (min-width: 681px) {
+    .hero { padding: 50px 5%; }
+    .hero-text { max-width: 520px; }
+  }
+
+  @media (max-width: 680px) {
+    nav { display: none; }
+    .wheel-svg-wrap { width: 270px; height: 270px; }
+    .stats-banner { gap: 32px; }
+    .hero { padding: 40px 5%; }
+  }
+
+  /* ══ PHOTO POSTS SECTION ══ */
+  .posts-section {
+    background: #eef4fb;
+    padding: 68px 5%;
+  }
+  .posts-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ── Main Posts (Featured) ── */
+  .main-posts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+    margin-bottom: 36px;
+  }
+  @media (max-width: 680px) {
+    .main-posts-grid { grid-template-columns: 1fr; }
+  }
+
+  .main-post-card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(30,90,168,0.13);
+    border: 1.5px solid #d0e4f7;
+    transition: transform .22s, box-shadow .22s;
+    display: flex;
+    flex-direction: column;
+  }
+  .main-post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 32px rgba(30,90,168,0.18);
+  }
+  .main-post-img-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: #c8dff0;
+  }
+  .main-post-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .35s, opacity .3s;
+    opacity: 0;
+  }
+  .main-post-img-wrap img.loaded {
+    opacity: 1;
+  }
+  .main-post-card:hover .main-post-img-wrap img {
+    transform: scale(1.04);
+  }
+  .main-post-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--blue-mid);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+  .main-post-body {
+    padding: 18px 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  .main-post-meta {
+    font-size: 0.72rem;
+    color: var(--text-light);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .main-post-meta::before {
+    content: '📅';
+    font-size: 0.7rem;
+  }
+  .main-post-title {
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    line-height: 1.4;
+  }
+  .main-post-desc {
+    font-size: 0.83rem;
+    color: var(--text-light);
+    line-height: 1.7;
+  }
+  .main-post-footer {
+    padding: 10px 20px 14px;
+    border-top: 1px solid #e8f0fb;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+  }
+  .post-react-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background .18s, color .18s;
+    font-family: 'Noto Sans Devanagari', sans-serif;
+  }
+  .post-react-btn:hover {
+    background: #e4f0fb;
+    color: var(--blue-mid);
+  }
+  .post-react-btn.liked { color: #b91c1c; }
+
+  /* ── Swipeable Regular Posts ── */
+  .posts-carousel-label {
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .posts-carousel-label::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, var(--blue-mid), transparent);
+    border-radius: 2px;
+  }
+
+  .posts-carousel-outer {
+    position: relative;
+  }
+  .posts-carousel-viewport {
+    overflow: hidden;
+    border-radius: 14px;
+  }
+  .posts-carousel-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.42s cubic-bezier(.4,0,.2,1);
+    will-change: transform;
+    cursor: grab;
+    user-select: none;
+  }
+  .posts-carousel-track:active { cursor: grabbing; }
+
+  .post-card {
+    flex: 0 0 calc(33.333% - 14px);
+    min-width: 0;
+    background: var(--white);
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1.5px solid #d0e4f7;
+    box-shadow: 0 3px 14px rgba(30,90,168,0.10);
+    display: flex;
+    flex-direction: column;
+    transition: transform .22s, box-shadow .22s;
+  }
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(30,90,168,0.16);
+  }
+  @media (max-width: 900px) {
+    .post-card { flex: 0 0 calc(50% - 10px); }
+  }
+  @media (max-width: 580px) {
+    .post-card { flex: 0 0 calc(85% - 10px); }
+  }
+
+  .post-img-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #c8dff0;
+    overflow: hidden;
+  }
+  .post-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .35s, opacity .3s;
+    opacity: 0;
+  }
+  .post-img-wrap img.loaded {
+    opacity: 1;
+  }
+  .post-card:hover .post-img-wrap img { transform: scale(1.05); }
+  .post-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--blue-dark);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 20px;
+  }
+  .post-body {
+    padding: 14px 16px 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .post-meta {
+    font-size: 0.68rem;
+    color: var(--text-light);
+    font-weight: 600;
+  }
+  .post-title {
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    line-height: 1.4;
+  }
+  .post-desc {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    line-height: 1.65;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .post-footer {
+    padding: 8px 16px 12px;
+    border-top: 1px solid #e8f0fb;
+    display: flex;
+    gap: 12px;
+  }
+
+  /* Placeholder image when photo missing */
+  .post-img-placeholder {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #c5dcf0, #e4f2fb);
+    font-size: 2.5rem;
+    transition: opacity .4s;
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>📞 071-437072</span>
+  <span>📍 Butwal-10, Kalikanagar, Rupendehi</span>
+  <span>🌐 <a href="http://www.kalikaschoolbtl.edu.np">www.kalikaschoolbtl.edu.np</a></span>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-area">
+    <div class="logo-circle">
+      <svg viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="34" cy="34" r="32" fill="#eaf5fb" stroke="#1e5aa8" stroke-width="2"/>
+        <circle cx="34" cy="34" r="26" fill="none" stroke="#1e5aa8" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="34" y="22" text-anchor="middle" font-size="7" fill="#1a3a6b" font-family="Noto Sans Devanagari,sans-serif" font-weight="bold">कालिका</text>
+        <rect x="22" y="26" width="20" height="13" rx="2" fill="#1e5aa8"/>
+        <rect x="21" y="23" width="26" height="5" rx="1.5" fill="#3b82d1"/>
+        <line x1="34" y1="39" x2="34" y2="45" stroke="#1a3a6b" stroke-width="2"/>
+        <line x1="27" y1="45" x2="41" y2="45" stroke="#1a3a6b" stroke-width="2"/>
+        <text x="34" y="56" text-anchor="middle" font-size="5.5" fill="#1e5aa8" font-family="sans-serif">Btl-10</text>
+      </svg>
+    </div>
+    <div class="school-name">
+      <h1>कालिका मानवज्ञान<br>माध्यमिक विद्यालय</h1>
+      <p>KALIKA MANAVGYAN SECONDARY SCHOOL · Butwal-10</p>
+    </div>
+  </div>
+  <nav>
+    <a href="#home" class="active">गृहपृष्ठ</a>
+    <a href="#why">विशेषता</a>
+    <a href="#posts">फोटो पोस्ट</a>
+    <a href="#notices">सूचना</a>
+    <a href="#contact">सम्पर्क</a>
+    <a href="#admission" class="btn-admit">भर्ना खुला</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <div class="hero-eyebrow">बुटवल-१०, कालिकानगर</div>
+    <h2>किन तपाईँको नानीबाबुलाई<br><span>कालिका मानवज्ञान</span><br>माध्यमिक विद्यालयनै पढाउने?</h2>
+    <p>अभिभावकहरूले खोज्ने सबै कुरा हामी उपलब्ध गराउँछौँ। गुणस्तरीय शिक्षा, सुरक्षित वातावरण र बच्चाको सर्वाङ्गीण विकासका लागि हामी प्रतिबद्ध छौँ।</p>
+    <div class="hero-btns">
+      <a href="#admission" class="btn-primary">भर्ना फारम भर्नुहोस्</a>
+      <a href="#why" class="btn-outline">थप जान्नुहोस्</a>
+    </div>
+  </div>
+
+  <!-- SPINNING WHEEL -->
+  <div class="wheel-container">
+    <div class="wheel-svg-wrap" id="wheelWrap">
+      <svg viewBox="-5 -5 330 330" xmlns="http://www.w3.org/2000/svg" id="wheelSvg">
+        <!-- Rotating group -->
+        <g id="wheelGroup" transform="rotate(0,160,160)">
+
+          <!-- EXPLODED SEGMENTS — each pushed outward from center by 12px -->
+
+          <!-- Segment 1: सुरक्षित यातायात -->
+          <path fill="#dbeafe" stroke="#1e5aa8" stroke-width="2" stroke-linejoin="round" d="M 174.14,21.50 A 128,128 0 0,1 259.47,62.60 L 203.50,114.01 A 52,52 0 0,0 168.83,97.32 Z"/>
+          <text transform="translate(204.3,68.1) rotate(25.7)" text-anchor="middle" font-size="8.5" fill="#1a3a6b" font-family="Noto Sans Devanagari,sans-serif" font-weight="bold">
+            <tspan x="0" dy="-5">सुरक्षित यातायात</tspan>
+            <tspan x="0" dy="13">सुविधा</tspan>
+          </text>
+
+          <!-- Segment 2: शुद्ध पिउने पानीको -->
+          <path fill="#bfdbfe" stroke="#1e5aa8" stroke-width="2" stroke-linejoin="round" d="M 277.10,84.70 A 128,128 0 0,1 298.17,177.04 L 223.08,165.34 A 52,52 0 0,0 214.52,127.82 Z"/>
+          <text transform="translate(259.4,137.3) rotate(77.1)" text-anchor="middle" font-size="8.5" fill="#1a3a6b" font-family="Noto Sans Devanagari,sans-serif" font-weight="bold">
+            <tspan x="0" dy="-5">शुद्ध पिउने</tspan>
+            <tspan x="0" dy="13">पानी</tspan>
+          </text>
+
+          <!-- Segment 3: प्रयोगशाला -->
+          <path fill="#dbeafe" stroke="#1e5aa8" stroke-width="2" stroke-linejoin="round" d="M 291.88,204.60 A 128,128 0 0,1 232.83,278.65 L 195.16,212.64 A 52,52 0 0,0 219.15,182.56 Z"/>
+          <text transform="translate(239.7,223.6) rotate(128.6)" text-anchor="middle" font-size="8.5" fill="#1a3a6b" font-family="Noto Sans Devanagari,sans-serif" font-weight="bold">
+            <tspan x="0" dy="-5">प्रयोगशाला</tspan>
+            <tspan x="0" dy="13">सुविधा</tspan>
+          </text>
+
+          <!-- Segment 4: डिजिटल कक्षाकोठा -->
+          <path fill="#bfdbfe" stroke="#1e5aa8" stroke-width="2" stroke-linejoin="round" d="M 207.36,290.92 A 128,128 0 0,1 112.64,290.92 L 140.76,220.31 A 52,52 0 0,0 179.24,220.31 Z"/>
+          <text transform="translate(160.0,262.0) rotate(180)" text-anchor="middle" font-size="8.5" fill="#1a3a6b" font-family="Noto Sans Devanagari,sans-serif" font-weight="bold">
+            <tspan x="0" dy="-5">डिजिटल</tspan>
+            <tspan x="0" dy="13">कक्षाकोठा</tspan>
+          </text>
+
+          <!-- Segment 5: सिर्जनात्मक -->
+          <path fill="#dbeafe" stroke="#1e5aa8" stroke-width="2" stroke-linejoin="round" d="M 87.17,278.65 A 128,128 0 0,1 28.12,204.60 L 100.85,182.56 A 52,52 0 0,0 124.84,212.64 Z"/>
+          <text transform="translate(80.3,223.6) rotate(231.4)" text-anchor="middle" font-size="8.5" fill="#1a3a6b" font-family="Noto Sans Devanagari,sans-serif" font-weight="bold">
+            <tspan x="0" dy="-5">सिर्जनात्मक</tspan>
+            <tspan x="0" dy="13">गतिविधिहरू</tspan>
+          </text>
+
+          <!-- Segment 6: खेलकुद तथा -->
+          <path fill="#bfdbfe" stroke="#1e5aa8" stroke-width="2" stroke-linejoin="round" d="M 21.83,177.04 A 128,128 0 0,1 42.90,84.70 L 105.48,127.82 A 52,52 0 0,0 96.92,165.34 Z"/>
+          <text transform="translate(60.6,137.3) rotate(-77.1)" text-anchor="middle" font-size="8.5" fill="#1a3a6b" font-family="Noto Sans Devanagari,sans-serif" font-weight="bold">
+            <tspan x="0" dy="-5">खेलकुद तथा</tspan>
+            <tspan x="0" dy="13">गतिविधि</tspan>
+          </text>
+
+          <!-- Segment 7: अभिभावक -->
+          <path fill="#dbeafe" stroke="#1e5aa8" stroke-width="2" stroke-linejoin="round" d="M 60.53,62.60 A 128,128 0 0,1 145.86,21.50 L 151.17,97.32 A 52,52 0 0,0 116.50,114.01 Z"/>
+          <text transform="translate(115.7,68.1) rotate(-25.7)" text-anchor="middle" font-size="8.5" fill="#1a3a6b" font-family="Noto Sans Devanagari,sans-serif" font-weight="bold">
+            <tspan x="0" dy="-5">अभिभावक</tspan>
+            <tspan x="0" dy="13">सहभागिता</tspan>
+          </text>
+
+        </g><!-- end wheelGroup -->
+
+        <!-- STATIC CENTER — analogue clock -->
+        <defs>
+          <radialGradient id="clockFace" cx="40%" cy="35%" r="70%">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#dbeafe"/>
+          </radialGradient>
+          <radialGradient id="clockCenterDot" cx="50%" cy="30%" r="80%">
+            <stop offset="0%" stop-color="#1e5aa8"/>
+            <stop offset="100%" stop-color="#1a3a6b"/>
+          </radialGradient>
+        </defs>
+        <!-- Face -->
+        <circle cx="160" cy="160" r="52" fill="url(#clockFace)" stroke="#1e5aa8" stroke-width="2.5"/>
+        <circle cx="160" cy="160" r="48" fill="none" stroke="#bfdbfe" stroke-width="1"/>
+        <!-- Tick marks + numbers -->
+        <g id="clockTicks"></g>
+        <!-- OM -->
+        <text x="160" y="140" text-anchor="middle" font-size="7" fill="#1a3a6b" opacity="0.18" font-family="serif">ॐ</text>
+        <!-- Hands -->
+        <line id="wHourHand"   x1="160" y1="160" x2="160" y2="128" stroke="#1a3a6b" stroke-width="3.5" stroke-linecap="round"/>
+        <line id="wMinuteHand" x1="160" y1="160" x2="160" y2="117" stroke="#1e5aa8" stroke-width="2.5" stroke-linecap="round"/>
+        <line id="wSecondHand" x1="160" y1="168" x2="160" y2="113" stroke="#b91c1c" stroke-width="1.4" stroke-linecap="round"/>
+        <!-- Center dot -->
+        <circle cx="160" cy="160" r="4" fill="url(#clockCenterDot)"/>
+        <circle cx="160" cy="160" r="2" fill="#3b82d1"/>
+        <circle cx="160" cy="160" r="0.8" fill="white"/>
+      </svg>
+    </div>
+    <div class="spin-hint" id="wheelDigitalTime" style="font-size:1.05rem;letter-spacing:1px;font-weight:700;color:var(--blue-dark);opacity:1;font-family:'Noto Serif Devanagari',serif;">--:--:-- --</div>
+  </div>
+</section>
+
+<!-- PHOTO POSTS SECTION -->
+<section class="posts-section" id="posts">
+  <div class="posts-inner">
+    <div class="section-title">विद्यालयका क्षणहरू</div>
+
+    <!-- FEATURED / MAIN POSTS -->
+    <div class="main-posts-grid" id="mainPostsGrid">
+      <!-- JS ले render गर्छ -->
+    </div>
+
+    <!-- SWIPEABLE REGULAR POSTS -->
+    <div class="posts-carousel-label">थप क्षणहरू</div>
+    <div class="posts-carousel-outer">
+      <div class="posts-carousel-viewport">
+        <div class="posts-carousel-track" id="postsTrack">
+          <!-- JS ले render गर्छ -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-banner">
+  <div class="stat"><span class="stat-num">२५+</span><div class="stat-label">वर्षको अनुभव</div></div>
+  <div class="stat"><span class="stat-num">१२००+</span><div class="stat-label">विद्यार्थी</div></div>
+  <div class="stat"><span class="stat-num">५०+</span><div class="stat-label">अनुभवी शिक्षक</div></div>
+  <div class="stat"><span class="stat-num">९८%</span><div class="stat-label">उत्तीर्ण दर</div></div>
+</div>
+
+<!-- WHY -->
+<section class="why-section" id="why">
+  <div class="section-label">हाम्रा विशेषताहरू</div>
+  <div class="section-title">अभिभावकहरूले खोज्ने सबै कुरा हामीसँग छ</div>
+  <p class="section-sub">तपाईँको नानीबाबुको उज्ज्वल भविष्यका लागि हामी निरन्तर प्रतिबद्ध छौँ।</p>
+  <div class="features-grid">
+    <div class="feature-card"><div class="feature-icon">🚌</div><h3>सुरक्षित यातायात</h3><p>विद्यालयको आफ्नै बस सेवाद्वारा सुरक्षित आवातजावात।</p></div>
+    <div class="feature-card"><div class="feature-icon">💧</div><h3>शुद्ध पिउने पानी</h3><p>RO फिल्टर प्रणालीद्वारा सधैँ शुद्ध पानी उपलब्ध।</p></div>
+    <div class="feature-card"><div class="feature-icon">🔬</div><h3>प्रयोगशाला सुविधा</h3><p>विज्ञान, कम्प्युटर र भाषा प्रयोगशाला — व्यावहारिक सिकाइका लागि।</p></div>
+    <div class="feature-card"><div class="feature-icon">💻</div><h3>डिजिटल कक्षाकोठा</h3><p>स्मार्ट बोर्ड र डिजिटल प्रविधिमार्फत आधुनिक शिक्षण।</p></div>
+    <div class="feature-card"><div class="feature-icon">🎨</div><h3>सिर्जनात्मक गतिविधि</h3><p>कला, संगीत, नृत्य र सांस्कृतिक कार्यक्रमहरू।</p></div>
+    <div class="feature-card"><div class="feature-icon">⚽</div><h3>खेलकुद गतिविधि</h3><p>खेलमैदान, योग कक्षा र राष्ट्रिय प्रतियोगिताहरू।</p></div>
+    <div class="feature-card"><div class="feature-icon">👨‍👩‍👧</div><h3>अभिभावक सहभागिता</h3><p>नियमित अभिभावक–शिक्षक बैठक र प्रगति रिपोर्ट।</p></div>
+  </div>
+</section>
+
+<!-- NEWS / BLACKBOARD SECTION -->
+<section class="news-section" id="notices">
+  <div class="news-inner">
+    <div class="section-label">सूचना पाटी</div>
+    <div class="section-title">ताजा सूचनाहरू</div>
+
+    <!-- Blackboard with slides inside -->
+    <div class="bb-wrap" id="bbWrap">
+      <img src="photos/blackboard.png" alt="कालोपाटी" class="bb-bg">
+      <!-- text viewport = chalk-writing area only -->
+      <div class="bb-viewport">
+        <div class="bb-track" id="bbTrack">
+          <div class="bb-loading-msg" id="bbLoading">सूचना लोड हुँदैछ...</div>
+        </div>
+      </div>
+      <!-- chalk dots inside the board (below writing area) -->
+      <div class="bb-dots" id="bbDots"></div>
+    </div>
+
+    <!-- arrow nav + counter below board -->
+    <div class="bb-nav">
+      <button class="bb-btn" id="bbPrev" aria-label="अघिल्लो">&#8249;</button>
+      <span class="bb-counter" id="bbCounter"></span>
+      <button class="bb-btn" id="bbNext" aria-label="अर्को">&#8250;</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="admission">
+  <h2>आजै भर्ना गर्नुहोस् — सीटहरू सीमित छन्!</h2>
+  <p>तपाईँको नानीबाबुको उज्ज्वल भविष्यको शुरुवात कालिका मानवज्ञानबाट गर्नुहोस्।</p>
+  <a href="tel:071437072" class="btn-white">📞 ०७१-४३७०७२ मा फोन गर्नुहोस्</a>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>कालिका मानवज्ञान माध्यमिक विद्यालय</h4>
+      <p>गुणस्तरीय शिक्षा प्रदान गरी बच्चाहरूको सर्वाङ्गीण विकासमा समर्पित।</p>
+    </div>
+    <div class="footer-col">
+      <h4>द्रुत लिङ्कहरू</h4>
+      <a href="#home">गृहपृष्ठ</a>
+      <a href="#why">विशेषताहरू</a>
+      <a href="#posts">फोटो पोस्टहरू</a>
+      <a href="#notices">सूचना पाटी</a>
+      <a href="#admission">भर्ना</a>
+    </div>
+    <div class="footer-col">
+      <h4>सम्पर्क</h4>
+      <p>📞 071-437072</p>
+      <p>📍 Butwal-10, Kalikanagar, Rupendehi</p>
+      <a href="http://www.kalikaschoolbtl.edu.np">🌐 www.kalikaschoolbtl.edu.np</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© २०८२ कालिका मानवज्ञान माध्यमिक विद्यालय। सर्वाधिकार सुरक्षित।</span>
+    <span>Butwal-10, Kalikanagar</span>
+  </div>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════
+//  PHOTO POSTS — posts/descriptions.json बाट
+// ══════════════════════════════════════════════
+(async function () {
+  const MAIN_KEYS = ['mainpost1', 'mainpost2'];
+  const POST_KEYS = ['post1', 'post2', 'post3'];
+
+  let data = {};
+  try {
+    const res = await fetch('posts/descriptions.json');
+    data = await res.json();
+  } catch (e) {
+    console.warn('posts/descriptions.json लोड हुन सकेन:', e);
+  }
+
+  /* ── Image helper — smooth fade-in, placeholder पनि fade हुन्छ ── */
+  function makeImgWrap(src, emoji = '🏫') {
+    const wrap = document.createElement('div');
+
+    // Placeholder — सुरुमा देखिन्छ, photo load भएपछि fade हुन्छ
+    const ph = document.createElement('div');
+    ph.className = 'post-img-placeholder';
+    ph.textContent = emoji;
+    ph.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;background:linear-gradient(135deg,#c5dcf0,#e4f2fb);transition:opacity .4s;';
+    wrap.appendChild(ph);
+
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = '';
+    img.loading = 'lazy';
+
+    // Load success → fade in photo, fade out placeholder
+    img.onload = function () {
+      img.classList.add('loaded');
+      ph.style.opacity = '0';
+      setTimeout(() => { if (ph.parentNode) ph.parentNode.removeChild(ph); }, 420);
+    };
+
+    // Load fail → photo already invisible (opacity:0), placeholder stays
+    img.onerror = function () {
+      img.style.display = 'none';
+    };
+
+    wrap.appendChild(img);
+    return wrap;
+  }
+
+  /* ── Like/Share reaction button ── */
+  function makeReactBtn(icon, countText, storageKey) {
+    const btn = document.createElement('button');
+    btn.className = 'post-react-btn';
+    const liked = localStorage.getItem(storageKey) === '1';
+    if (liked) btn.classList.add('liked');
+
+    function render() {
+      btn.innerHTML = '';
+      btn.appendChild(document.createTextNode(icon + ' ' + countText));
+    }
+    render();
+
+    btn.addEventListener('click', () => {
+      const isLiked = btn.classList.toggle('liked');
+      localStorage.setItem(storageKey, isLiked ? '1' : '0');
+    });
+    return btn;
+  }
+
+  /* ═══════════════════════════
+     MAIN POSTS (Featured Grid)
+  ═══════════════════════════ */
+  const mainGrid = document.getElementById('mainPostsGrid');
+  MAIN_KEYS.forEach(key => {
+    const d = data[key] || {};
+    const card = document.createElement('div');
+    card.className = 'main-post-card';
+
+    // Image
+    const imgWrap = makeImgWrap(d.image || '', '🎓');
+    imgWrap.className = 'main-post-img-wrap';
+    if (d.tag) {
+      const tag = document.createElement('span');
+      tag.className = 'main-post-tag';
+      tag.textContent = d.tag;
+      imgWrap.appendChild(tag);
+    }
+    card.appendChild(imgWrap);
+
+    // Body
+    const body = document.createElement('div');
+    body.className = 'main-post-body';
+
+    const meta = document.createElement('div');
+    meta.className = 'main-post-meta';
+    meta.textContent = d.date || '';
+    body.appendChild(meta);
+
+    const title = document.createElement('div');
+    title.className = 'main-post-title';
+    title.textContent = d.title || key;
+    body.appendChild(title);
+
+    const desc = document.createElement('div');
+    desc.className = 'main-post-desc';
+    desc.textContent = d.description || '';
+    body.appendChild(desc);
+
+    card.appendChild(body);
+
+    // Footer
+    const footer = document.createElement('div');
+    footer.className = 'main-post-footer';
+    footer.appendChild(makeReactBtn('❤️', d.likes || '०', 'like_' + key));
+    footer.appendChild(makeReactBtn('↗️', d.shares || '०', 'share_' + key));
+    card.appendChild(footer);
+
+    mainGrid.appendChild(card);
+  });
+
+  /* ═══════════════════════════
+     REGULAR POSTS (Infinite Carousel — no buttons)
+  ═══════════════════════════ */
+  const track = document.getElementById('postsTrack');
+
+  // Cards render गर्छु
+  POST_KEYS.forEach(key => {
+    const d = data[key] || {};
+    const card = document.createElement('div');
+    card.className = 'post-card';
+
+    const imgWrap = makeImgWrap(d.image || '', '📸');
+    imgWrap.className = 'post-img-wrap';
+    if (d.tag) {
+      const tag = document.createElement('span');
+      tag.className = 'post-tag';
+      tag.textContent = d.tag;
+      imgWrap.appendChild(tag);
+    }
+    card.appendChild(imgWrap);
+
+    const body = document.createElement('div');
+    body.className = 'post-body';
+
+    const meta = document.createElement('div');
+    meta.className = 'post-meta';
+    meta.textContent = '📅 ' + (d.date || '');
+    body.appendChild(meta);
+
+    const title = document.createElement('div');
+    title.className = 'post-title';
+    title.textContent = d.title || key;
+    body.appendChild(title);
+
+    const desc = document.createElement('div');
+    desc.className = 'post-desc';
+    desc.textContent = d.description || '';
+    body.appendChild(desc);
+
+    card.appendChild(body);
+
+    const footer = document.createElement('div');
+    footer.className = 'post-footer';
+    footer.appendChild(makeReactBtn('❤️', d.likes || '०', 'like_' + key));
+    footer.appendChild(makeReactBtn('↗️', d.shares || '०', 'share_' + key));
+    card.appendChild(footer);
+
+    track.appendChild(card);
+  });
+
+  /* ── Infinite loop: cards clone गरेर अगाडि–पछाडि राख्छु ── */
+  const origCards = Array.from(track.children);
+  const total = origCards.length;
+
+  // Clone गरेर prepend र append — infinite illusion
+  origCards.forEach(c => track.appendChild(c.cloneNode(true)));
+  origCards.forEach(c => track.insertBefore(c.cloneNode(true), track.firstChild));
+
+  // gap र card width
+  function cardStep() {
+    const c = track.querySelector('.post-card');
+    if (!c) return 0;
+    return c.offsetWidth + (parseFloat(getComputedStyle(track).gap) || 20);
+  }
+
+  // सुरुमा middle set (clone को सुरु)
+  let offset = 0;
+  function initOffset() {
+    offset = cardStep() * total;
+    track.style.transition = 'none';
+    track.style.transform = `translateX(-${offset}px)`;
+  }
+  initOffset();
+  window.addEventListener('resize', initOffset);
+
+  // Seamless loop check — transition नगरी jump
+  function checkLoop() {
+    const step = cardStep();
+    const min = step;
+    const max = step * (total * 2);
+    if (offset >= max) {
+      offset -= step * total;
+      track.style.transition = 'none';
+      track.style.transform = `translateX(-${offset}px)`;
+    } else if (offset <= min - step) {
+      offset += step * total;
+      track.style.transition = 'none';
+      track.style.transform = `translateX(-${offset}px)`;
+    }
+  }
+
+  /* Touch/Mouse drag */
+  let startX = 0, startOffset = 0, dragging = false;
+
+  function snapToNearest() {
+    const step = cardStep();
+    offset = Math.round(offset / step) * step;
+    track.style.transition = 'transform 0.38s cubic-bezier(.4,0,.2,1)';
+    track.style.transform = `translateX(-${offset}px)`;
+    setTimeout(checkLoop, 400);
+  }
+
+  track.addEventListener('mousedown', e => {
+    dragging = true;
+    startX = e.clientX;
+    startOffset = offset;
+    track.style.transition = 'none';
+  });
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    offset = startOffset - (e.clientX - startX);
+    track.style.transform = `translateX(-${offset}px)`;
+  });
+  window.addEventListener('mouseup', e => {
+    if (!dragging) return;
+    dragging = false;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 40) offset = startOffset - Math.sign(dx) * cardStep();
+    snapToNearest();
+  });
+
+  track.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startOffset = offset;
+    track.style.transition = 'none';
+  }, { passive: true });
+  track.addEventListener('touchmove', e => {
+    offset = startOffset - (e.touches[0].clientX - startX);
+    track.style.transform = `translateX(-${offset}px)`;
+  }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) offset = startOffset - Math.sign(dx) * cardStep();
+    snapToNearest();
+  });
+})();
+</script>
+
+<script>
+// ══════════════════════════════════════════════
+//  BLACKBOARD NEWS — सबै JSON फाइलबाट slide हुन्छ
+//  थप्न: FILES array मा नयाँ path राख्नुहोस्
+// ══════════════════════════════════════════════
+(async function () {
+  const FILES = [
+    'news/news10.json',   // विशेष सूचना (कालोपाटी)
+    'news/news1.json',
+    'news/news2.json',
+    'news/news3.json',
+    'news/news4.json',
+    'news/news6.json',   // परीक्षा रुटिङ तालिका
+  ];
+
+  const wrap    = document.getElementById('bbWrap');
+  const track   = document.getElementById('bbTrack');
+  const dotsEl  = document.getElementById('bbDots');
+  const loadMsg = document.getElementById('bbLoading');
+  const btnPrev = document.getElementById('bbPrev');
+  const btnNext = document.getElementById('bbNext');
+  const counter = document.getElementById('bbCounter');
+
+  // ── Fetch all JSON ──────────────────────────
+  const results = await Promise.allSettled(FILES.map(f => fetch(f).then(r => r.json())));
+  const items = results.filter(r => r.status === 'fulfilled').map(r => r.value);
+
+  if (!items.length) {
+    loadMsg.textContent = 'सूचना लोड हुन सकेन।';
+    return;
+  }
+  loadMsg.remove();
+
+  // ── Build slides ────────────────────────────
+  items.forEach(data => {
+    const slide = document.createElement('div');
+    slide.className = 'bb-slide';
+
+    // मिति
+    const miti = document.createElement('div');
+    miti.className = 'bb-miti';
+    miti.textContent = 'मिति :- ' + (data.date || '');
+    slide.appendChild(miti);
+
+    // शीर्षक
+    const head = document.createElement('div');
+    head.className = 'bb-heading';
+    head.textContent = data.title || '';
+    slide.appendChild(head);
+
+    // TABLE type (परीक्षा रुटिङ)
+    if (data.type === 'table' && data.headers && data.rows) {
+      const wrap = document.createElement('div');
+      wrap.className = 'bb-table-wrap';
+      const tbl = document.createElement('table');
+      tbl.className = 'bb-table';
+
+      // header row
+      const thead = document.createElement('thead');
+      const hr = document.createElement('tr');
+      data.headers.forEach(h => {
+        const th = document.createElement('th');
+        th.textContent = h;
+        hr.appendChild(th);
+      });
+      thead.appendChild(hr);
+      tbl.appendChild(thead);
+
+      // data rows
+      const tbody = document.createElement('tbody');
+      data.rows.forEach(row => {
+        const tr = document.createElement('tr');
+        row.forEach(cell => {
+          const td = document.createElement('td');
+          td.textContent = cell;
+          tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+      });
+      tbl.appendChild(tbody);
+      wrap.appendChild(tbl);
+      slide.appendChild(wrap);
+
+    } else {
+      // सामान्य लाइनहरू
+      const linesWrap = document.createElement('div');
+      linesWrap.className = 'bb-lines';
+      const lines = Array.isArray(data.lines) ? data.lines : [data.body || ''];
+      lines.forEach(line => {
+        const p = document.createElement('div');
+        p.className = 'bb-line';
+        p.textContent = line;
+        linesWrap.appendChild(p);
+      });
+      slide.appendChild(linesWrap);
+    }
+
+    track.appendChild(slide);
+  });
+
+  const slides = track.querySelectorAll('.bb-slide');
+  const total  = slides.length;
+  let current  = 0;
+  let autoTimer = null;
+
+  // ── Dots ────────────────────────────────────
+  const dots = [];
+  items.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'bb-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', `सूचना ${i + 1}`);
+    d.addEventListener('click', () => { goTo(i); resetAuto(); });
+    dotsEl.appendChild(d);
+    dots.push(d);
+  });
+
+  // ── Nepali numeral helper ────────────────────
+  function toNP(n) {
+    return String(n).replace(/[0-9]/g, d => '०१२३४५६७८९'[+d]);
+  }
+
+  // ── Go to slide ─────────────────────────────
+  function goTo(idx) {
+    current = (idx + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    btnPrev.disabled = false;
+    btnNext.disabled = false;
+    counter.textContent = `${toNP(current + 1)} / ${toNP(total)}`;
+  }
+
+  // ── Auto-slide every 4 s ────────────────────
+  function startAuto() {
+    autoTimer = setInterval(() => goTo(current + 1), 4000);
+  }
+  function resetAuto() {
+    clearInterval(autoTimer);
+    startAuto();
+  }
+
+  // ── Buttons ─────────────────────────────────
+  btnPrev.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+  btnNext.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+
+  // ── Touch / Mouse swipe on board ────────────
+  let startX = 0, isDragging = false;
+
+  function onStart(e) {
+    isDragging = true;
+    startX = e.touches ? e.touches[0].clientX : e.clientX;
+    track.style.transition = 'none';
+    clearInterval(autoTimer);
+  }
+  function onMove(e) {
+    if (!isDragging) return;
+    const x   = e.touches ? e.touches[0].clientX : e.clientX;
+    const dx  = x - startX;
+    const vw  = track.parentElement.offsetWidth;
+    const pct = (dx / vw) * 100;
+    track.style.transform = `translateX(calc(-${current * 100}% + ${pct}%))`;
+  }
+  function onEnd(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    track.style.transition = 'transform 0.45s cubic-bezier(.4,0,.2,1)';
+    const x   = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    const dx  = x - startX;
+    const threshold = track.parentElement.offsetWidth * 0.25;
+    if (dx < -threshold)      goTo(current + 1);
+    else if (dx > threshold)  goTo(current - 1);
+    else                      goTo(current);
+    startAuto();
+  }
+
+  wrap.addEventListener('mousedown',  onStart);
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('mouseup',   onEnd);
+  wrap.addEventListener('touchstart', onStart, { passive: true });
+  wrap.addEventListener('touchmove',  onMove,  { passive: true });
+  wrap.addEventListener('touchend',   onEnd);
+
+  // ── Init ────────────────────────────────────
+  goTo(0);
+  startAuto();
+})();
+</script>
+
+<script>
+// ── WHEEL CENTER ANALOGUE CLOCK ──
+(function () {
+  const NS = 'http://www.w3.org/2000/svg';
+  const CX = 160, CY = 160, R = 48; // clock radius (inner ring)
+  const tg = document.getElementById('clockTicks');
+
+  // Draw tick marks & Nepali numerals
+  const nums = ['१२','१','२','३','४','५','६','७','८','९','१०','११'];
+  for (let i = 0; i < 60; i++) {
+    const rad = i * 6 * Math.PI / 180;
+    const isHour = i % 5 === 0, isQ = i % 15 === 0;
+    const r1 = R, r2 = isQ ? R - 8 : isHour ? R - 6 : R - 3;
+    const sw = isQ ? 2 : isHour ? 1.4 : 0.7;
+    const op = isQ ? '0.7' : isHour ? '0.5' : '0.2';
+    const line = document.createElementNS(NS, 'line');
+    line.setAttribute('x1', CX + r1 * Math.sin(rad));
+    line.setAttribute('y1', CY - r1 * Math.cos(rad));
+    line.setAttribute('x2', CX + r2 * Math.sin(rad));
+    line.setAttribute('y2', CY - r2 * Math.cos(rad));
+    line.setAttribute('stroke', '#1a3a6b');
+    line.setAttribute('stroke-width', sw);
+    line.setAttribute('opacity', op);
+    line.setAttribute('stroke-linecap', 'round');
+    tg.appendChild(line);
+  }
+  for (let i = 0; i < 12; i++) {
+    const rad = i * 30 * Math.PI / 180;
+    const isQ = i % 3 === 0;
+    const nr = isQ ? R - 14 : R - 13;
+    const txt = document.createElementNS(NS, 'text');
+    txt.setAttribute('x', CX + nr * Math.sin(rad));
+    txt.setAttribute('y', CY - nr * Math.cos(rad));
+    txt.setAttribute('text-anchor', 'middle');
+    txt.setAttribute('dominant-baseline', 'central');
+    txt.setAttribute('font-size', isQ ? '7' : '6');
+    txt.setAttribute('font-weight', isQ ? '700' : '600');
+    txt.setAttribute('fill', '#1a3a6b');
+    txt.setAttribute('opacity', isQ ? '0.75' : '0.5');
+    txt.setAttribute('font-family', 'Noto Sans Devanagari, sans-serif');
+    txt.textContent = nums[i];
+    tg.appendChild(txt);
+  }
+
+  function rot(id, deg) {
+    const el = document.getElementById(id);
+    if (el) el.setAttribute('transform', `rotate(${deg},${CX},${CY})`);
+  }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const now = new Date();
+    const h24 = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
+    const h12 = h24 % 12 || 12;
+    const ampm = h24 < 12 ? 'AM' : 'PM';
+    rot('wHourHand',   (h24 % 12) * 30 + m * 0.5);
+    rot('wMinuteHand', m * 6  + s * 0.1);
+    rot('wSecondHand', s * 6);
+    const el = document.getElementById('wheelDigitalTime');
+    const NP = n => String(n).replace(/[0-9]/g, d => '०१२३४५६७८९'[+d]);
+    const ampmNP = h24 < 12 ? 'बिहान' : h24 < 17 ? 'दिउँसो' : 'बेलुकी';
+    if (el) el.textContent = NP(pad(h12)) + ':' + NP(pad(m)) + ':' + NP(pad(s)) + ' ' + ampmNP;
+  }
+
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
+<script>
+(function () {
+  const wrap  = document.getElementById('wheelWrap');
+  const group = document.getElementById('wheelGroup');
+  const CX = 160, CY = 160;
+  const VB_SIZE = 320; // viewBox logical size (before the -5 offset)
+
+  const AUTO_SPEED = 0.18;   // deg/frame — slow continuous spin
+  const FRICTION   = 0.97;   // inertia decay after drag
+  const MIN_VEL    = 0.02;   // below this → hand back to auto-spin
+
+  let angle    = 0;
+  let velocity = AUTO_SPEED; // start with auto-spin speed
+  let dragging = false;
+  let prevMouseAngle = 0;
+  let lastTime = 0;
+  let rafId    = null;
+
+  /* Convert client coords → angle (deg) from wheel center */
+  function clientToAngle(e) {
+    const rect = wrap.getBoundingClientRect();
+    const cx = e.touches ? e.touches[0].clientX : e.clientX;
+    const cy = e.touches ? e.touches[0].clientY : e.clientY;
+    // Map to viewBox coords (viewBox is "-5 -5 330 330", so offset by 5)
+    const svgX = ((cx - rect.left) / rect.width)  * 330 - 5;
+    const svgY = ((cy - rect.top)  / rect.height) * 330 - 5;
+    return Math.atan2(svgY - CY, svgX - CX) * (180 / Math.PI);
+  }
+
+  function applyRotation() {
+    group.setAttribute('transform', `rotate(${angle},${CX},${CY})`);
+  }
+
+  /* Main animation loop — always running */
+  function loop() {
+    if (!dragging) {
+      if (Math.abs(velocity) < MIN_VEL) {
+        // Smoothly restore auto-spin direction
+        velocity += (AUTO_SPEED - velocity) * 0.05;
+      } else {
+        velocity *= FRICTION;
+        // Once slow enough, nudge back toward auto
+        if (Math.abs(velocity) < AUTO_SPEED * 2) {
+          velocity += (AUTO_SPEED - velocity) * 0.02;
+        }
+      }
+      angle += velocity;
+      applyRotation();
+    }
+    rafId = requestAnimationFrame(loop);
+  }
+
+  /* Drag start */
+  function onStart(e) {
+    e.preventDefault();
+    dragging = true;
+    velocity = 0;
+    prevMouseAngle = clientToAngle(e);
+    lastTime = performance.now();
+  }
+
+  /* Drag move */
+  function onMove(e) {
+    if (!dragging) return;
+    e.preventDefault();
+    const now = performance.now();
+    const dt  = Math.max(now - lastTime, 1);
+    const cur = clientToAngle(e);
+    let delta = cur - prevMouseAngle;
+    if (delta >  180) delta -= 360;
+    if (delta < -180) delta += 360;
+
+    velocity = delta / dt * 16; // scale to per-frame
+    angle   += delta;
+    applyRotation();
+    prevMouseAngle = cur;
+    lastTime = now;
+  }
+
+  /* Drag end — let inertia + loop take over */
+  function onEnd() {
+    if (!dragging) return;
+    dragging = false;
+    // clamp velocity so it doesn't spin wildly
+    velocity = Math.max(-8, Math.min(8, velocity));
+  }
+
+  // Mouse
+  wrap.addEventListener('mousedown',  onStart);
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('mouseup',   onEnd);
+  // Touch
+  wrap.addEventListener('touchstart', onStart, { passive: false });
+  window.addEventListener('touchmove', onMove, { passive: false });
+  window.addEventListener('touchend',  onEnd);
+
+  // Kick off loop
+  loop();
+})();
+</script>
+
+</body>
+</html>
